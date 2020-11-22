@@ -1,0 +1,95 @@
+<div class="main-container">
+<div class="row">
+<div class="container col-md-3 col-sm">
+<h2>Add Data</h2>
+<mat-card class="card">
+    <form #myForm="ngForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Product Number</label>
+          <input type="number" class="form-control"
+          name="productNumber" [(ngModel)]="formObj.productNumber">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Product Name</label>
+            <input type="text" class="form-control" 
+            name="productName" [(ngModel)]="formObj.productName">
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Product Price</label>
+            <input type="text" class="form-control" 
+            name="productPrice" [(ngModel)]="formObj.productPrice">
+          </div>
+          
+          <div class="form-group">
+            <label for="exampleInputEmail1">Product Description</label>
+            <input type="text" class="form-control" 
+            name="productDescription" [(ngModel)]="formObj.productDescription">
+          </div>
+
+        <button type="button" 
+        class="btn btn-primary"
+        (click)="addData(myForm.value)">
+        Submit
+        </button>
+
+        <button type="button" class="btn btn-dark"
+        (click)="updateData()">
+        Update
+      </button>
+      </form>
+</mat-card>
+</div>
+
+<div class="second-container col-md-7 col-sm">
+
+  <div class="form-group col-md-7 col-sm">
+    <label for="search">Find Products</label>
+    <input type="text" class="form-control" 
+    placeholder="Search Product by Name" [(ngModel)]="nameSearch" >
+  </div>
+
+    <h2>All Available Data</h2>
+<mat-card class="second-card">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product Number</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Product Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of allData | searchfilter:nameSearch">
+            <td>{{data.productNumber}}</td>
+            <td>{{data.productName}}</td>
+            <td>{{data.productPrice}}</td>
+            <td>{{data.productDescription}}</td>
+
+            <!-- Edit Button: -->
+            <button mat-raised-button color="accent"
+            (click)="editData(data)">
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+
+            <span>&nbsp;</span>
+
+            <!-- Delete Button: -->
+            <button mat-raised-button color="primary"
+            (click)="deleteData(data)">
+              <mat-icon>remove_circle</mat-icon>
+              Delete
+            </button>
+          </tr>
+        </tbody>
+      </table>
+</mat-card>    
+</div>
+
+</div>
+</div>
+
